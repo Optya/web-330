@@ -19,17 +19,6 @@ Copied the required styling from my WEB-231 directory site.css and global.css fi
     color: inherit;
     background-color: inherit;
 }
-a.return-home {
-    color: #4f3674;
-    text-decoration: none;
-}
-a:visited.return-home {
-    color: #3c275a;
-}
-a:hover.return-home{
-    color: #4f3674;
-    background-color: #d6a800;
-}
 .full-width {
     width: 100%;
 }

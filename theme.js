@@ -1,9 +1,9 @@
 /**
  * Title: theme.js
- *Author: Walter McCue
- *Date: 08/12/22
- *Description: JavaScript to capture, store, and display the light or dark theme that the user selects
- *References: WEB 300 GitHub; WEB 300 Assign_1;
+ * Author: Walter McCue
+ * Date: 08/12/22
+ * Description: JavaScript to capture, store, and display the light or dark theme that the user selects
+ * References: WEB 300 GitHub; WEB 300 Assign_1;
  */
 
 /**
