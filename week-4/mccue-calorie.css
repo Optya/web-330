@@ -1,0 +1,13 @@
+/**
+Title: mccue-calorie.css
+Author: Walter McCue
+Date: 09/03/22
+Description: Styling for mccue-calorie.html
+*/
+/** styles the foodList span */
+#foodList {
+    float: right;
+    color: #df546a;
+    font-size: 12px;
+    letter-spacing: 2px;
+}
