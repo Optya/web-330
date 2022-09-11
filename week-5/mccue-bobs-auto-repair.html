@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="en">
+    <head>
+<!--
+    Title: mccue-bobs-auto-repair.html
+    Author: Walter McCue
+    Date: 09/10/22
+    Description: This assignment will show that I understand iterators and generators by building a shopping cart website.
+    References: WEB 330 GitHub; WEB 330 Assign_5;
+ -->
+        <meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>WEB 330 - Enterprise JavaScript II</title>
+    <!--
+        Stylesheets, Google Font Kit, CDN Font Kit, and JS Scripting Links
+    -->
+        <link href="../theme.css" type="text/css" rel="stylesheet" />
+        <link href="../site.css" type="text/css" rel="stylesheet" />
+        <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;700&display=swap" rel="stylesheet" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+        <script src="../theme.js"></script>
+        <script defer src="../setTheme.js"></script>
+        <script src="cart-component.js"></script>
+    </head>
+    <body class="light-theme">
+    <!--
+        Icon to set light/dark theme
+    -->
+        <i onclick="toggleMode(this)" id="icon-mode" class="fa fa-toggle-off pull-right" style="font-size: 28px;">
+            <span id="icon-text"></span></i><br>
+    <!--
+        Main Content
+    -->
+    <h1 class="app-header">Welcome to Bob's Automotive Repair Shop!</h1>
+        <!--
+            Product selection section
+        -->
+            <div id="container">
+                <div class="card">
+                    <div class="card-title">
+                        Product Listing
+                        <br><cart-component></cart-component>
+                    </div>
+                    <div class="card-content">
+                        <div class="form">
+                            <div class="form-field">
+                                Choose a product:
+                                <select type="selection" id="productList" class="drop-down-menu">
+                                    <option value="Select">--Select--</option>
+                                    <option value="19.99">Oil Change</option>
+                                    <option value="18.44">Filter Replacement</option>
+                                    <option value="9.99">Wiper Fluid Refill</option>
+                                </select>
+                                <i id="cart-message">To view your shopping cart, click on the cart icon.</i>
+                            </div>
+                            <div class="form-field">
+                                <button type="submit" id="btnAddProduct" class="btn btn-primary full-width">Add to Cart</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div><br>
+            <a class="return-home" href="../index.html">Return</a>
+            <br><br>
+        <!--
+            Results section
+        -->
+            <div class="card">
+                <div class="card-title">
+                    Shopping Cart
+                </div>
+                <div class="card-content" id="shoppingCart">
+                </div>
+            </div><br><br>
+        <!--
+            JavaScript section
+        -->
+        <script type="module">
+            // Imports the classes from the JS modules
+            import { Product } from './product.js';
+            import { ShoppingCart } from './shopping-cart-js';
+            // Creates a new shopping cart
+            let shoppingCart = new ShoppingCart();
+            setCartCount();
+            // function that executes when the user clicks the button
+            document.getElementById('btnAddProduct').onclick = function() {
+                // Assigns product names and values to the corresponding variable
+                let productList = document.getElementById('productList');
+                let product = productList.options[productList.selectedIndex].text;
+                let productValue = productList.options[productList.selectedIndex].value;
+                // Adds products to the cart
+                if (product !== '--Select--') {
+                    shoppingCart.add(new Product(product, productValue));
+                    setCartCount();
+                    alert(`${product} was added to your shopping cart!`);
+                    productList.value = 'Select';
+                }
+            };
+            // function that executes when the user clicks the button
+            document.getElementById('btnAddProduct').onclick = function() {
+                // Creates the table opening tag and table headers
+                let cartDisplayTable = `<table>
+                    <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Price</th>
+                    </tr>`;
+                // Creates the table data row(s)
+                for (let product of shoppingCart.generator()) {
+                    cartDisplayTable += `<tr>
+                        <td>${product.id}</td>
+                        <td>${product.name}</td>
+                        <td>${product.value}</td>
+                    </tr>`;
+                }
+                // Creates the closing table tag
+                cartDisplayTable += `</table>`;
+                // Displays the created table in the Results section
+                document.getElementById('shoppingCart').innerHTML = cartDisplayTable;
+            };
+            // function to display how many items are in the shopping cart
+            function setCartCount() {
+                document.getElementById('cart-count').innerHTML = shoppingCart.count();
+            };
+        </script>
+    </body>
+</html>

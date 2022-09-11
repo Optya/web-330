@@ -3,7 +3,7 @@
  * Author: Walter McCue
  * Date: 08/12/22
  * Description: JavaScript to capture, store, and display the light or dark theme that the user selects
- * References: WEB 300 GitHub; WEB 300 Assign_1;
+ * References: WEB 330 GitHub; WEB 330 Assign_1;
  */
 
 /**
