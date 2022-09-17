@@ -14,7 +14,7 @@ import { FloatMaxField } from "./float-max-field.js";
 
 // Creates and exports the validator class, constructor, and functions
 export class Validator {
-    validator = [];
+    validators = [];
     messages = [];
     constructor(name, field) {
         this.name = name;
@@ -35,8 +35,8 @@ export class Validator {
     }
     // Returns an error message if any of the 4 validations return false
     validate() {
-        for (let validator of this.validator) {
-            if (validator.validate()) {
+        for (let validator of this.validators) {
+            if (!validator.validate()) {
                 this.messages.push(validator.getMessage());
                 return false;
             }
