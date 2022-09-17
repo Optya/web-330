@@ -22,16 +22,16 @@ export class Validator {
     }
     // These 4 functions validate user input against the 4 imported classes
     addRequiredField() {
-        this.validator.push(new RequiredField(this.name, this.field));
+        this.validators.push(new RequiredField(this.name, this.field));
     }
     addRequiredFloatField() {
-        this.validator.push(new FloatField(this.name, this.field));
+        this.validators.push(new FloatField(this.name, this.field));
     }
     addFloatMinField(min) {
-        this.validator.push(new FloatMinField(this.name, this.field, min));
+        this.validators.push(new FloatMinField(this.name, this.field, min));
     }
     addFloatMaxField(max) {
-        this.validator.push(new FloatMaxField(this.name, this.field, max));
+        this.validators.push(new FloatMaxField(this.name, this.field, max));
     }
     // Returns an error message if any of the 4 validations return false
     validate() {
