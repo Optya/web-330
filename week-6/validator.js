@@ -35,7 +35,7 @@ export class Validator {
     }
     // Returns an error message if any of the 4 validations return false
     validate() {
-        for (let validator of this.validators) {
+        for (let validator of this.validator) {
             if (validator.validate()) {
                 this.messages.push(validator.getMessage());
                 return false;
