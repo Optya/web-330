@@ -57,6 +57,7 @@
             JavaScript section
         -->
         <script>
+            // fetches the books.xml file and parses data
             document.addEventListener('DOMContentLoaded', () =>{
                 let fileName = 'books.xml';
                 fetch(fileName)
@@ -64,7 +65,63 @@
                     .then(data => {
                         let domParser = new DOMParser();
                         let xmlBooks = domParser.parseFromString(data, 'text/xml');
+                        loadBooks(xmlBooks);
+                        addIsbnClickEvents();
                     })
+                    // Creates the table to input the books.xml file data into
+                    function loadBooks(xml) {
+                        let books = xml.getElementsByTagName('book');
+                        let tableData = `<table id='bookTable' class='table'>
+                            <tr>
+                                <th>ISBN</th>
+                                <th>Title</th>
+                                <th>Description</th>
+                                <th>Pages</th>
+                                <th>Authors</th>
+                            </tr><tbody>`;
+                        // Loop set to show the data with the correct labels
+                        for (let book of books) {
+                            let isbn = book.getElementsByTagName('isbn')[0].childNodes[0].nodeValue;
+                            let title = book.getElementsByTagName('title')[0].childNodes[0].nodeValue;
+                            let description = book.getElementsByTagName('description')[0].childNodes[0].nodeValue;
+                            let pages = book.getElementsByTagName('pages')[0].childNodes[0].nodeValue;
+                            let authors = book.getElementsByTagName('authors')[0].childNodes[0].nodeValue;
+                            // Creates the body of the table
+                            tableData += `<tr>
+                                <td data-value='ISBN'><a href='#' class='isbn-link'>${isbn}</a></td>
+                                <td data-value='Title'>${title}</td>
+                                <td data-value='Description'>${description}</td>
+                                <td data-value='Pages'>${pages}</td>
+                                <td data-value='Authors'>${authors}</td>
+                                </tr>`;
+                        }
+                        // Closes the table string and binds the tableData to the bookList div
+                        tableData += `</tbody></table>`;
+                        document.getElementById('bookList').innerHTML = tableData;
+                    }
+                    // Function that populates the results section with book information when the ISBN is clicked
+                    function anchorClicked(e) {
+                        e.preventDefault();
+                        let self = this;
+                        let cell= self.parentElement;
+                        let row = cell.parentElement;
+                        let data = row.querySelectorAll('td');
+                        // Displays the Unordered List of the book data for the ISBN that was clicked
+                        let bookData = `<ul style="list-style-type:none;">`;
+                        for (let field of data) {
+                            bookData += `<li><b>${field.dataset.value}:</b> ${field.textContent}</li>`;
+                        }
+                        // Closes the ul string and binds the list to the selectedBook div
+                        bookData += `</ul>`;
+                        document.getElementById('selectedBook').innerHTML = bookData;
+                    }
+                    // Function that adds book data to the results section when user clicks an ISBN link.
+                    function addIsbnClickEvents() {
+                        let viewButtons = document.querySelectorAll("#bookTable tbody .isbn-link");
+                        for (let index = 0; index < viewButtons.length; index++) {
+                            viewButtons[index].addEventListener('click', anchorClicked);
+                        }
+                    }
             });
         </script>
     </body>
