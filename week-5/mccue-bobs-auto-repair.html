@@ -108,11 +108,11 @@
                         <th>Price</th>
                     </tr>`;
                 // Creates the table data row(s)
-                for (let product of shoppingCart) {
+                for (let products of shoppingCart) {
                     cartDisplayTable += `<tr>
-                        <td>${product.id}</td>
-                        <td>${product.name}</td>
-                        <td>${product.value}</td>
+                        <td>${products.id}</td>
+                        <td>${products.name}</td>
+                        <td>${products.value}</td>
                     </tr>`;
                 }
                 // Creates the closing table tag
