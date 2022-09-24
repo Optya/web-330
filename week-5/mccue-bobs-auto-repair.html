@@ -108,7 +108,7 @@
                         <th>Price</th>
                     </tr>`;
                 // Creates the table data row(s)
-                for (let product of shoppingCart.generator()) {
+                for (let product of shoppingCart) {
                     cartDisplayTable += `<tr>
                         <td>${product.id}</td>
                         <td>${product.name}</td>
