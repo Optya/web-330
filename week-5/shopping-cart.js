@@ -17,7 +17,7 @@ export class ShoppingCart {
     add(product) {
         this.products.push(product);
     }
-    *generator() {
+    *[Symbol.iterator]() {
         for (let product of this.products) {
             yield product;
         }
