@@ -174,7 +174,7 @@
                     const appetizers = appetizersEl.getElementsByTagName('input');
                     const mainCoursesEl = document.getElementById('main-courses');
                     const mainCourses = mainCoursesEl.getElementsByTagName('input');
-                    const dessertsEl = document.getElementById('deserts');
+                    const dessertsEl = document.getElementById('desserts');
                     const desserts = dessertsEl.getElementsByTagName('input');
         // New Instance of the Bill class
                     const bill = new Bill();
@@ -191,7 +191,7 @@
                     }
                     for (let mainCourse of mainCourses) {
                         if (mainCourse.checked) {
-                            bill.addMainCourse(new MainCourse(mainCouse.name, mainCourse.value));
+                            bill.addMainCourse(new MainCourse(mainCourse.name, mainCourse.value));
                         }
                     }
                     for (let dessert of desserts) {
