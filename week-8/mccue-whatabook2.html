@@ -126,7 +126,9 @@
                     if (res.hasOwnProperty(key)) {
                         let authors = [];
                         if (res[key].details.authors) {
-                            authors = res[key].details.authors.map(function(author) {})
+                            authors = res[key].details.authors.map(function(author) {
+                                return author.name;
+                            })
                         }
                         let book = {
                             isbn: res[key].details.isbn_13 ? res[key].details.isbn_13 : res[key].details.isbn_10,
